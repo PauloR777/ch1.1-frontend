@@ -21,7 +21,7 @@
       </q-card-section>
     </q-card>
 
-    <q-card>
+    <q-card class="q-mb-md">
       <q-card-section>
         <div class="text-h6">Docker Concepts (สรุปสั้น ๆ)</div>
         <q-list bordered separator class="q-mt-sm">
@@ -29,6 +29,25 @@
             <q-item-section>
               <q-item-label>{{ item.title }}</q-item-label>
               <q-item-label caption>{{ item.detail }}</q-item-label>
+            </q-item-section>
+          </q-item>
+        </q-list>
+      </q-card-section>
+    </q-card>
+
+    <q-card>
+      <q-card-section>
+        <div class="text-h6">Docker Quick Reference</div>
+        <q-list bordered separator class="q-mt-sm">
+          <q-item v-for="(cmd, index) in dockerCommands" :key="index">
+            <q-item-section avatar>
+              <q-icon name="terminal" color="primary" />
+            </q-item-section>
+            <q-item-section>
+              <q-item-label class="text-weight-bold">
+                <code>{{ cmd.command }}</code>
+              </q-item-label>
+              <q-item-label caption>{{ cmd.detail }}</q-item-label>
             </q-item-section>
           </q-item>
         </q-list>
@@ -77,6 +96,25 @@ const dockerItems = [
   {
     title: 'Network',
     detail: 'ให้บริการใน Docker ติดต่อกันได้ เช่น Nginx ส่งต่อคำขอไปยัง Express',
+  },
+]
+
+const dockerCommands = [
+  {
+    command: 'docker compose config',
+    detail: 'ใช้เมื่อต้องการตรวจสอบความถูกต้องของไฟล์ compose และดูค่าคอนฟิกสุดท้ายที่รวมตัวแปรหรือ environment แล้ว',
+  },
+  {
+    command: 'docker compose up -d --build',
+    detail: 'ใช้เมื่อต้องการ build image ใหม่และสตาร์ททุก service ตามไฟล์ compose แบบทำงานเบื้องหลัง (-d)',
+  },
+  {
+    command: 'docker compose ps',
+    detail: 'ใช้เมื่อต้องการดูสถานะการทำงานและพอร์ตของ container ในโปรเจกต์ compose ปัจจุบัน',
+  },
+  {
+    command: 'docker build -t my-quasar-frontend:latest -f frontend/Dockerfile ./frontend',
+    detail: 'ใช้เมื่อต้องการสร้าง image ของ Quasar frontend แยกเฉพาะจากโฟลเดอร์ ./frontend โดยระบุ Dockerfile เองและตั้งชื่อ tag',
   },
 ]
 </script>
